@@ -1,0 +1,24 @@
+{
+  "name": "bike_ride_app",
+  "version": "1.0.0",
+  "description": "Create a team bike ride, or join an existing one",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markrivasrobertson/bike_ride_app.git"
+  },
+  "keywords": [
+    "team",
+    "biking"
+  ],
+  "author": "Mark Robertson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markrivasrobertson/bike_ride_app/issues"
+  },
+  "homepage": "https://github.com/markrivasrobertson/bike_ride_app#readme"
+}
