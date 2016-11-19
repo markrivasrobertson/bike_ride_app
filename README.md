@@ -1,1 +1,1 @@
-# bike_ride_app
+# shopping_list_app
