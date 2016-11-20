@@ -13,7 +13,14 @@ app.get('/', (request, response) => {
 });
 
 app.post('/', (request, response) => {
-  shoppingList.addToList().then((list) => {
+  const newItem = request.body;
+  shoppingList.addToList(newItem).then((serverResponse) => {
     response.status(204).send();
   })
-})
+  .catch((error) => {
+    console.error(error);
+    response.status(500).send();
+  });
+});
+
+module.exports = app;
