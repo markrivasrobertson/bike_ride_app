@@ -6,18 +6,38 @@ class App extends Component {
     super();
     this.state = {
       list: [],
-    }
+      options: [],
+    };
+    this.addItem = this.addItem.bind(this);
+  }
+  componentDidMount() {
+    const items = ['toilet paper', 'paper towels', 'milk', 'eggs', 'veggies', 'coffee', 'cereal', 'juice', 'butter', 'bread', 'chips'];
+    this.setState({
+      options: items,
+    });
+  }
+  addItem() {
+    const itemToAdd = document.getElementById('selectMenu').value;
+    const newList = this.state.list;
+    newList.push(itemToAdd);
+    this.setState({
+      list: newList,
+    });
   }
   render() {
-    const items = ['toilet paper', 'paper towels', 'milk', 'eggs', 'veggies', 'coffee', 'cereal', 'juice', 'butter', 'bread', 'chips'];
-    const itemOptions = items.map((item) => {
-      const newOption = document.createElement('option');
-      newOption.value = `${item}`
-      newOption.text = `${item}`
+    const shoppingList = this.state.list.map((item, idx) => {
+      return (
+        <h2 key={idx}>
+          {item}
+        </h2>
+      );
     });
-    const shoppingList = this.state.list.map((item) => {
-      const newListItem = document.createElement('h1');
-      newListItem.text = `${item}`;
+    const itemOptions = this.state.options.map((item, idx) => {
+      return (
+        <option value={item} key={idx}>
+          {item}
+        </option>
+      );
     });
     return (
       <div>
@@ -27,16 +47,16 @@ class App extends Component {
           }
         </div>
         <div id="addItem">
-          <select>
+          <select id="selectMenu">
             {
               itemOptions
             }
           </select>
-          <button>Add to the List</button>
+          <button onClick={this.addItem}>Add to the List</button>
         </div>
       </div>
     );
   }
 }
 
-export default App;
+module.exports = App;
