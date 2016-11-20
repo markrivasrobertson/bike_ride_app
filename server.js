@@ -1,5 +1,5 @@
 const path = require('path');
-// const app
+const app = require('./app/app.js');
 const express = require('express');
 
 const webpack = require('webpack');
@@ -24,7 +24,7 @@ app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-const port = process.env.PORT;
+const port = 3000;
 app.listen(port, () => {
   console.log(`Listening port ${port}`);
 });

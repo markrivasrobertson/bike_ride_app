@@ -5,12 +5,12 @@ class ShoppingList {
     this.url = 'https://shopping-list-app-95125.firebaseio.com/.json';
   }
   getList() {
-    request.get(this.url)
+    return request.get(this.url)
       .then((response) => {
-        return response;
-      })
+        return response.text;
+      });
   }
-  addToList() {
+  addToList({ list }) {
     request.patch(this.url)
   }
 }

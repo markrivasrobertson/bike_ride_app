@@ -5,32 +5,53 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      list: [],
+      list: {
+        milk: false,
+        eggs: false,
+        veggies: false,
+        coffee: false,
+        cereal: false,
+        juice: false,
+        butter: false,
+        bread: false,
+        chips: false,
+      },
       options: [],
     };
     this.addItem = this.addItem.bind(this);
   }
   componentDidMount() {
-    const items = ['toilet paper', 'paper towels', 'milk', 'eggs', 'veggies', 'coffee', 'cereal', 'juice', 'butter', 'bread', 'chips'];
+    const items = ['milk', 'eggs', 'veggies', 'coffee', 'cereal', 'juice', 'butter', 'bread', 'chips'];
+    const newList = request.get('https://shopping-list-app-95125.firebaseio.com/.json');
     this.setState({
+      list: newList,
       options: items,
     });
   }
   addItem() {
     const itemToAdd = document.getElementById('selectMenu').value;
     const newList = this.state.list;
-    newList.push(itemToAdd);
+    newList[itemToAdd] = true;
     this.setState({
       list: newList,
     });
   }
   render() {
-    const shoppingList = this.state.list.map((item, idx) => {
-      return (
-        <h2 key={idx}>
-          {item}
-        </h2>
-      );
+    const itemsList = Object.keys(this.state.list);
+    const shoppingList = [];
+    itemsList.forEach((item) => {
+      if (this.state.list[item]===true) {
+        shoppingList.push(item);
+      }
+    });
+    const displayShoppingList = shoppingList.map((item, idx) => {
+      if (this.state.list[item]===true) {
+        return (
+          <h2 key={idx}>
+            {item}
+          </h2>
+        );
+      }
     });
     const itemOptions = this.state.options.map((item, idx) => {
       return (
@@ -43,7 +64,7 @@ class App extends Component {
       <div>
         <div id="itemList">
           {
-            shoppingList
+            displayShoppingList
           }
         </div>
         <div id="addItem">
